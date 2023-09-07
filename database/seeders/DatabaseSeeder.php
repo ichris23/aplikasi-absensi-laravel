@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         Karyawan::create([
             'nik' => '201',
-            'nama_lengkap' => 'titit',
+            'nama_lengkap' => 'ivan',
             'jabatan' => 'HRD',
             'no_hp' => '087822221111',
             'password' => bcrypt('12345'),
