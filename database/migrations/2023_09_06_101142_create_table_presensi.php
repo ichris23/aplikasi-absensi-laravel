@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             //define foreign key constraint
-            $table->foreign('karyawan_nik')->references('nik')->on('karyawan');
+            $table->foreign('karyawan_nik')->references('nik')->on('karyawans');
         });
     }
 
