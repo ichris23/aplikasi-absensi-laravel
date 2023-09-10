@@ -15,4 +15,13 @@ class AuthController extends Controller
             return back()->with('loginError', 'Login Failed!');
         }
     }
+
+    public function proseslogout()
+    {
+        if (Auth::guard('karyawan')->check()){
+            Auth::guard('karyawan')->logout();
+            return redirect('/');
+        }
+    }
+
 }
