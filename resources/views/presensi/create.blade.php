@@ -63,10 +63,17 @@
 @section('content')
 <div class="row" style="margin-top:70px;">
     <div class="col">
+        @if ($cek > 0)
+        <input type="hidden" id="lokasi" disabled readonly>
+        <div class="webcam-capture mb-2"></div>
+        <div id="map" class="mb-2"></div>
+        <button id="takeabsen" class="btn btn-warning btn-block"><ion-icon name="camera-outline"></ion-icon>Absen Pulang</button>
+        @else
         <input type="hidden" id="lokasi" disabled readonly>
         <div class="webcam-capture mb-2"></div>
         <div id="map" class="mb-2"></div>
         <button id="takeabsen" class="btn btn-primary btn-block"><ion-icon name="camera-outline"></ion-icon>Absen Masuk</button>
+        @endif
     </div>
 </div>
 @endsection
@@ -96,7 +103,40 @@
     }    
 
     function errorCallBack(){
-
     }
+
+    $("#takeabsen").click(function(e){
+        Webcam.snap(function(uri){
+            image = uri;
+        })
+        var lokasi = $("#lokasi").val();
+        $.ajax({
+           type: 'POST',
+            url:'/presensi/store',
+            data : {
+                _token: "{{ csrf_token() }}",
+                image:image,
+                lokasi:lokasi
+            },
+            cache:false,
+            success:function(respond){
+                var status = respond.split("|")
+                if(status[0] == "success"){
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: status[1],
+                        icon: 'success',
+                })
+                setTimeout("location.href='/dashboard'", 3000);
+                }else{
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Error Wir!!',
+                        icon: 'error',
+                })
+                }
+            }
+        });
+    });
 </script>
 @endpush
