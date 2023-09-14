@@ -15,29 +15,21 @@
     <div class="d-flex align-items-center justify-content-center vh-100">
         <div class="col-md-5 bg-primary-subtle border border-primary-subtle rounded-6">
             <main class="form-signin w-75 m-auto">
-                @if (session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
-        
                 @if (session()->has('loginError'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                     {{ session('loginError') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
                     <div style="max-height: 500px; overflow:hidden">
                         <img src="https://source.unsplash.com/1200x600?login" class="card-img-top img-fluid mb-2 mt-3">
                     </div>
                     <h1 class="h3 mb-3 fw-large text-center fs-1">Please Login</h1>
-                    <form action="/login" method="post">
+                    <form action="/proseslogin" method="post">
                     @csrf
                     <div class="form-floating">
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" autofocus required value="{{ old('email') }}" autocomplete="off">
-                        <label for="email">Email address</label>
-                        @error('email')
+                        <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" placeholder="name@example.com" autofocus required value="{{ old('nik') }}" autocomplete="off">
+                        <label for="nik">Nomor Induk Karyawan</label>
+                        @error('nik')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
