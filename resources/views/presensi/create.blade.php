@@ -122,7 +122,7 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-        var circle = L.circle([-7.498512613765515, 112.70745656654428], {
+        var circle = L.circle([-7.319577321025912, 112.7088699503185], {
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5,
