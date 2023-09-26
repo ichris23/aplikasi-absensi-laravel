@@ -69,7 +69,7 @@ class PresensiController extends Controller
                 ];
                 $update = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->update($data_pulang);
                 if ($update) {
-                    echo "success|Terimakasih, Hati-hati di Jalan Wir!|out";
+                    echo "success|Terimakasih, Hati-hati di Jalan!|out";
                     Storage::put($file, $image_base64);
                 } else {
                     echo "error|Maaf Gagal Absen|out";
@@ -84,7 +84,7 @@ class PresensiController extends Controller
                 ];
                 $simpan = DB::table('presensi')->insert($data);
                 if ($simpan) {
-                    echo "success|Terimakasih, Selamat Bekerja  Wir!|in";;
+                    echo "success|Terimakasih, Selamat Bekerja!|in";;
                     Storage::put($file, $image_base64);
                 } else {
                     echo "error|Maaf Gagal Absen|in";
