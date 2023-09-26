@@ -13,7 +13,7 @@ class PresensiController extends Controller
     {
         $hariini = date("Y-m-d");
         $nik = Auth::guard('karyawan')->user()->nik;
-        $cek = DB::table('presensi')->where('tgl_presensi', $hariini)->where('karyawan_nik', $nik)->count();
+        $cek = DB::table('presensi')->where('tgl_presensi', $hariini)->where('nik', $nik)->count();
         return view('presensi.create', compact('cek'));
     }
 
@@ -33,7 +33,7 @@ class PresensiController extends Controller
         $jarak = $this->distance($latitudekantor, $longitudekantor, $latitudeuser, $longitudeuser);
         $radius = round($jarak["meters"]);
 
-        $cek = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('karyawan_nik', $nik)->count();
+        $cek = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->count();
 
         if ($cek > 0) {
             $ket = "out";
@@ -49,7 +49,7 @@ class PresensiController extends Controller
         $file = $folderPath . $fileName;
 
         $data = [
-            'karyawan_nik' => $nik,
+            'nik' => $nik,
             'tgl_presensi' => $tgl_presensi,
             'jam_in' => $jam,
             'foto_in' => $fileName,
@@ -65,7 +65,7 @@ class PresensiController extends Controller
                     'foto_out' => $fileName,
                     'lokasi_out' => $lokasi,
                 ];
-                $update = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('karyawan_nik', $nik)->update($data_pulang);
+                $update = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->update($data_pulang);
                 if ($update) {
                     echo "success|Terimakasih, Hati-hati di Jalan Wir!|out";
                     Storage::put($file, $image_base64);
@@ -74,7 +74,7 @@ class PresensiController extends Controller
                 }
             } else {
                 $data = [
-                    'karyawan_nik' => $nik,
+                    'nik' => $nik,
                     'tgl_presensi' => $tgl_presensi,
                     'jam_in' => $jam,
                     'foto_in' => $fileName,
