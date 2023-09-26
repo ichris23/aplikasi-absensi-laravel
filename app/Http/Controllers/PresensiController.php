@@ -69,7 +69,7 @@ class PresensiController extends Controller
                 ];
                 $update = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->update($data_pulang);
                 if ($update) {
-                    echo "success|Terimakasih, Hati-hati di Jalan Wir!|out";
+                    echo "success|Terimakasih, Hati-hati di Jalan!|out";
                     Storage::put($file, $image_base64);
                 } else {
                     echo "error|Maaf Gagal Absen|out";
@@ -84,7 +84,7 @@ class PresensiController extends Controller
                 ];
                 $simpan = DB::table('presensi')->insert($data);
                 if ($simpan) {
-                    echo "success|Terimakasih, Selamat Bekerja  Wir!|in";;
+                    echo "success|Terimakasih, Selamat Bekerja!|in";;
                     Storage::put($file, $image_base64);
                 } else {
                     echo "error|Maaf Gagal Absen|in";
@@ -151,5 +151,24 @@ class PresensiController extends Controller
         } else {
             return Redirect::back()->with(['error'=>'Data Gagal Diupdate']);;
         }
+    }
+    public function histori(){
+        $namabulan = ["","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+        return view('presensi.histori', compact('namabulan'));
+    }
+
+    public function gethistori(Request $request){
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $nik = Auth::guard('karyawan')->user()->nik;
+
+        $histori = DB::table('presensi')
+            ->whereRaw('MONTH(tgl_presensi)="' . $bulan . '"')
+            ->whereRaw('YEAR(tgl_presensi)="' . $tahun . '"')
+            ->where('nik', $nik)
+            ->orderBy('tgl_presensi')
+            ->get();
+
+        return view('presensi.gethistori', compact('histori'));
     }
 }
