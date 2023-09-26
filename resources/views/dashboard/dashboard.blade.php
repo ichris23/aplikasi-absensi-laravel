@@ -213,7 +213,7 @@
                                         <b>{{ $d->nama_lengkap }}<br>
                                         <small class="text-muted">{{ $d->jabatan }}</small>
                                     </div>
-                                    <span class="badge {{ $d->jam_in < "07:00" ? "bg-primary" : "bg-danger" }}">{{ $d->jam_in }}</span>
+                                    <span class="badge {{ $d->jam_in < "07:00" ? "bg-sucess" : "bg-danger" }}bg-primary">{{ $d->jam_in }}</span>
                                 </div>
                             </div>
                         </li>
