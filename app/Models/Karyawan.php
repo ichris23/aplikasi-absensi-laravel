@@ -23,5 +23,6 @@ class Karyawan extends Authenticatable
         'jabatan',
         'no_hp',
         'password',
+        'foto'
     ];
 }

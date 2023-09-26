@@ -6,7 +6,14 @@
     <div class="section" id="user-section">
         <div id="user-detail">
             <div class="avatar">
+                @if (Auth::guard('karyawan')->user()->foto)
+                @php
+                    $path = Storage::url('uploads/karyawan/'. Auth::guard('karyawan')->user()->foto)
+                @endphp
+                <img src="{{ url($path) }}" alt="avatar" class="imaged" style="height: 70px">
+                @else
                 <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+                @endif
             </div>
             <div id="user-info">
                 <h2 id="user-name">{{ Auth::guard('karyawan')->user()->nama_lengkap }}</h2>
@@ -207,13 +214,20 @@
                         @foreach ( $leaderboard as $d)
                         <li>
                             <div class="item">
-                                <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                            @if (Auth::guard('karyawan')->user()->foto)
+                                @php
+                                    $path = Storage::url('uploads/karyawan/'. Auth::guard('karyawan')->user()->foto)
+                                @endphp
+                                <img src="{{ url($path) }}" alt="avatar" class="imaged" style="height: 70px">
+                            @else
+                                <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+                            @endif
                                 <div class="in">
                                     <div>
                                         <b>{{ $d->nama_lengkap }}<br>
                                         <small class="text-muted">{{ $d->jabatan }}</small>
                                     </div>
-                                    <span class="badge {{ $d->jam_in < "07:00" ? "bg-sucess" : "bg-danger" }}bg-primary">{{ $d->jam_in }}</span>
+                                    <span class="badge {{ $d->jam_in < "07:00" ? "bg-sucess" : "bg-danger" }}">{{ $d->jam_in }}</span>
                                 </div>
                             </div>
                         </li>
