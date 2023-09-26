@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
-            $table->string('karyawan_nik');
+            $table->string('nik');
             $table->date('tgl_presensi');
             $table->time('jam_in');
             $table->time('jam_out')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             //define foreign key constraint
-            $table->foreign('karyawan_nik')->references('nik')->on('karyawan');
+            $table->foreign('nik')->references('nik')->on('karyawan');
         });
     }
 
