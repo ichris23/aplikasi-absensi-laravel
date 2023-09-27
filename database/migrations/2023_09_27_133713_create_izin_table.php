@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nik');
             $table->date('tgl_izin');
-            $table->string('status');
+            $table->char('status');
             $table->string('keterangan');
-            $table->string('status_approved');
+            $table->char('status_approved')->default(0);
             $table->timestamps();
 
             //define foreign key constraint
