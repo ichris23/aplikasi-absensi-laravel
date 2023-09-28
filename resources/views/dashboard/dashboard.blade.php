@@ -8,7 +8,7 @@
             <div class="avatar">
                 @if (Auth::guard('karyawan')->user()->foto)
                 @php
-                    $path = Storage::url('uploads/karyawan/'. Auth::guard('karyawan')->user()->foto)
+                $path = Storage::url('uploads/karyawan/'. Auth::guard('karyawan')->user()->foto)
                 @endphp
                 <img src="{{ url($path) }}" alt="avatar" class="imaged" style="height: 70px">
                 @else
@@ -28,7 +28,7 @@
                 <div class="list-menu">
                     <div class="item-menu text-center">
                         <div class="menu-icon">
-                            <a href="" class="green" style="font-size: 40px;">
+                            <a href="/editprofile" class="green" style="font-size: 40px;">
                                 <ion-icon name="person-sharp"></ion-icon>
                             </a>
                         </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="item-menu text-center">
                         <div class="menu-icon">
-                            <a href="" class="danger" style="font-size: 40px;">
+                            <a href="/presensi/izin" class="danger" style="font-size: 40px;">
                                 <ion-icon name="calendar-number"></ion-icon>
                             </a>
                         </div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="item-menu text-center">
                         <div class="menu-icon">
-                            <a href="" class="warning" style="font-size: 40px;">
+                            <a href="/presensi/histori" class="warning" style="font-size: 40px;">
                                 <ion-icon name="document-text"></ion-icon>
                             </a>
                         </div>
@@ -138,7 +138,7 @@
                     <div class="card">
                         <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.8rem">
                             <span class="badge bg-danger" style="position: absolute; top:3px; right:10px; font-size:0.6rem;
-                            z-index:999">10</span>
+                            z-index:999">{{ $rekapizin->jmlizin }}</span>
                             <ion-icon name="newspaper-outline" style="font-size: 1.6rem;" class="text-success mb-1"></ion-icon>
                             <br>
                             <span style="font-size: 0.8rem; font-weight:500">Izin</span>
@@ -149,7 +149,7 @@
                     <div class="card">
                         <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.8rem">
                             <span class="badge bg-danger" style="position: absolute; top:3px; right:10px; font-size:0.6rem;
-                            z-index:999">10</span>
+                            z-index:999">{{ $rekapizin->jmlsakit }}</span>
                             <ion-icon name="medkit-outline" style="font-size: 1.6rem;" class="text-warning mb-1"></ion-icon>
                             <br>
                             <span style="font-size: 0.8rem; font-weight:500">Sakit</span>
@@ -214,18 +214,18 @@
                         @foreach ( $leaderboard as $d)
                         <li>
                             <div class="item">
-                            @if (Auth::guard('karyawan')->user()->foto)
+                                @if (Auth::guard('karyawan')->user()->foto)
                                 @php
-                                    $path = Storage::url('uploads/karyawan/'. Auth::guard('karyawan')->user()->foto)
+                                $path = Storage::url('uploads/karyawan/'. Auth::guard('karyawan')->user()->foto)
                                 @endphp
                                 <img src="{{ url($path) }}" alt="avatar" class="imaged" style="height: 70px">
-                            @else
+                                @else
                                 <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
-                            @endif
+                                @endif
                                 <div class="in">
                                     <div>
                                         <b>{{ $d->nama_lengkap }}<br>
-                                        <small class="text-muted">{{ $d->jabatan }}</small>
+                                            <small class="text-muted">{{ $d->jabatan }}</small>
                                     </div>
                                     <span class="badge {{ $d->jam_in < "07:00" ? "bg-sucess" : "bg-danger" }}">{{ $d->jam_in }}</span>
                                 </div>
