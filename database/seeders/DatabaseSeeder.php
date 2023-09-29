@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use App\Models\Karyawan;
 use Illuminate\Database\Seeder;
 
@@ -21,10 +22,16 @@ class DatabaseSeeder extends Seeder
         // ]);
         Karyawan::create([
             'nik' => '201',
-            'nama_lengkap' => 'ivan',
+            'nama_lengkap' => 'Ivan Christopher Sukandar',
             'jabatan' => 'HRD',
             'no_hp' => '087822221111',
             'password' => bcrypt('12345'),
+        ]);
+
+        User::create([
+            'name' => 'Ivan Christopher Sukandar',
+            'email' => 'ivan@gmail.com',
+            'password' => bcrypt('12345')
         ]);
     }
 }
