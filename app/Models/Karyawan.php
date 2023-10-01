@@ -16,13 +16,14 @@ class Karyawan extends Authenticatable
     protected $table = "karyawan";
     protected $primaryKey = "nik";
 
-    protected $fillable = 
+    protected $fillable =
     [
         'nik',
         'nama_lengkap',
         'jabatan',
         'no_hp',
         'password',
-        'foto'
+        'foto',
+        'kode_dept'
     ];
 }
