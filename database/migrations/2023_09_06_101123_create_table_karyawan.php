@@ -17,9 +17,13 @@ return new class extends Migration
             $table->string('jabatan', 20);
             $table->string('no_hp', 20);
             $table->string('foto')->nullable();
+            $table->char('kode_dept');
             $table->string('password');
             $table->string('remember_token')->nullable();
             $table->timestamps();
+
+            //define foreign key constraint
+            $table->foreign('kode_dept')->references('kode_dept')->on('departemen');
         });
     }
 
