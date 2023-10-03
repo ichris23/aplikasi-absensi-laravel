@@ -20,6 +20,7 @@
   <link href="{{ asset('tabler/dist/css/tabler-payments.min.css?1692870487') }}" rel="stylesheet" />
   <link href="{{ asset('tabler/dist/css/tabler-vendors.min.css?1692870487') }}" rel="stylesheet" />
   <link href="{{ asset('tabler/dist/css/demo.min.css?1692870487') }}" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -55,6 +56,7 @@
   <!-- Tabler Core -->
   <script src="{{ asset('tabler/dist/js/tabler.min.js?1692870487') }}" defer></script>
   <script src="{{ asset('tabler/dist/js/demo.min.js?1692870487') }}" defer></script>
+  @stack('myscript')
 
 </body>
 
