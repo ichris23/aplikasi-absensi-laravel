@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
             'kode_dept' => 'MKT'
         ]);
 
-        Karyawan::factory(30)->create();
+        Karyawan::factory(50)->create();
 
         User::create([
             'name' => 'Ivan Christopher Sukandar',
