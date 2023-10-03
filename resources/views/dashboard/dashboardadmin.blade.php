@@ -117,7 +117,7 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                            {{ $rekappresensi->jmlTerlambat }}
+                            {{ $rekappresensi->jmlTerlambat !=null ? $rekappresensi->jmlTerlambat : 0 }}
                         </div>
                         <div class="text-secondary">
                           Karyawan Terlambat
