@@ -65,7 +65,6 @@
                                 </div>
                                 <div class="col-3 mt-3">
                                     <div class="form-group">
-                                        
                                         <button type="submit" class="btn btn-primary d-flex align-items-center justify-content-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -78,73 +77,55 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <table class="table table-bordered">
-                                    <thead>
+                        <div class="table-responsive col-lg-12">
+                            <table class="table table-striped table-xl">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>NIK</th>
+                                        <th>Nama</th>
+                                        <th>Jabatan</th>
+                                        <th>Nomor HP</th>
+                                        <th>Foto</th>
+                                        <th>Departemen</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($karyawan as $d)
+                                    @php
+                                        $path = Storage::url('uploads/karyawan/'.$d->foto);
+                                    @endphp
                                         <tr>
-                                            <th>No.</th>
-                                            <th>NIK</th>
-                                            <th>Nama</th>
-                                            <th>Jabatan</th>
-                                            <th>Nomor HP</th>
-                                            <th>Foto</th>
-                                            <th>Departemen</th>
-                                            <th>Aksi</th>
+                                            <td>{{ $loop->iteration + $karyawan->firstItem() -1 }}</td>
+                                            <td>{{ $d->nik }}</td>
+                                            <td>{{ $d->nama_lengkap }}</td>
+                                            <td>{{ $d->jabatan }}</td>
+                                            <td>{{ $d->no_hp }}</td>
+                                            <td>
+                                                @if (empty($d->foto))    
+                                                <img src="assets/img/sample/avatar/avatar1.jpg " class="avatar" alt="foto-karyawan">
+                                                @else
+                                                <img src="{{ url($path) }}" class="avatar" alt="foto-karyawan">
+                                                @endif
+                                            </td>
+                                            <td>{{ $d->nama_dept }}</td>
+                                            <td>
+                                                <a href ="#" class="edit btn" nik="{{ $d->nik }}"><i class="bi bi-pencil" style="font-size: 1.25rem; color: green;"></i></a>
+                                                <form action="/karyawan/delete/{{ $d->nik }}" method="post" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn px-2 border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-trash" style="font-size: 1.25rem; color: red;"></i></button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($karyawan as $d)
-                                        @php
-                                            $path = Storage::url('uploads/karyawan/'.$d->foto);
-                                        @endphp
-                                            <tr>
-                                                <td>{{ $loop->iteration + $karyawan->firstItem() -1 }}</td>
-                                                <td>{{ $d->nik }}</td>
-                                                <td>{{ $d->nama_lengkap }}</td>
-                                                <td>{{ $d->jabatan }}</td>
-                                                <td>{{ $d->no_hp }}</td>
-                                                <td>
-                                                    @if (empty($d->foto))    
-                                                    <img src="assets/img/sample/avatar/avatar1.jpg " class="avatar" alt="foto-karyawan">
-                                                    @else
-                                                    <img src="{{ url($path) }}" class="avatar" alt="foto-karyawan">
-                                                    @endif
-                                                </td>
-                                                <td>{{ $d->nama_dept }}</td>
-                                                <td>
-                                                    <div class = "btn-group">
-                                                        <a href ="#" class="edit btn btn-info btn-sm" nik="{{ $d->nik }}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                                                                <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                                                                <path d="M16 5l3 3"></path>
-                                                             </svg>
-                                                        </a>
-                                                        <form action="/karyawan/{{ $d->nik }}/delete" method="POST" style="margin-left:5px">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class = "btn btn-danger btn-sm delete-confirm" onclick="return confirm('Yakin?')">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                    <path d="M4 7l16 0"></path>
-                                                                    <path d="M10 11l0 6"></path>
-                                                                    <path d="M14 11l0 6"></path>
-                                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                                                 </svg>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                {{ $karyawan->links() }}
-                            </div>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                                {{ $karyawan->links() }}
+                            
+                        
                     </div>
                 </div>
             </div>
