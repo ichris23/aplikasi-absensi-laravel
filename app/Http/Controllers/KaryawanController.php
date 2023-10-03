@@ -68,14 +68,16 @@ class KaryawanController extends Controller
         }
     }
 
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         $nik = $request->nik;
         $departemen = DB::table('departemen')->get();
-        $karyawan = DB::table('karyawan')->where('nik',$nik)->first();
-        return view('karyawan.edit', compact('departemen','karyawan'));
+        $karyawan = DB::table('karyawan')->where('nik', $nik)->first();
+        return view('karyawan.edit', compact('departemen', 'karyawan'));
     }
 
-    public function update($nik, Request $request){
+    public function update($nik, Request $request)
+    {
         $nik = $request->nik;
         $nama_lengkap = $request->nama_lengkap;
         $jabatan = $request->jabatan;
@@ -99,7 +101,7 @@ class KaryawanController extends Controller
                 'foto' => $foto
             ];
 
-            $update = DB::table('karyawan')->where('nik',$nik)->update($data);
+            $update = DB::table('karyawan')->where('nik', $nik)->update($data);
             if ($update) {
                 if ($request->hasFile('foto')) {
                     $folderPath = "public/uploads/karyawan/";
@@ -114,12 +116,13 @@ class KaryawanController extends Controller
         }
     }
 
-    public function delete($nik){
-        $delete = DB::table('karyawan')->where('nik',$nik)->delete();
-        if($delete){
-            return Redirect::back()->with(['success'=>'Data Berhasil Dihapus']);
-        }else{
-            return Redirect::back()->with(['failed'=>'Data Gagal Dihapus']);
+    public function delete($nik)
+    {
+        $delete = DB::table('karyawan')->where('nik', $nik)->delete();
+        if ($delete) {
+            return Redirect::back()->with(['success' => 'Data Berhasil Dihapus']);
+        } else {
+            return Redirect::back()->with(['failed' => 'Data Gagal Dihapus']);
         }
     }
 }
