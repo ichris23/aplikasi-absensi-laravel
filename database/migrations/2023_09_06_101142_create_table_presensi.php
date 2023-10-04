@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('jam_in');
             $table->time('jam_out')->nullable();
             $table->string('foto_in');
-            $table->string('foto_out')->nullable();
+            $table->string('foto_out')->nullable(); 
             $table->text('lokasi_in');
             $table->text('lokasi_out')->nullable();
             $table->timestamps();
