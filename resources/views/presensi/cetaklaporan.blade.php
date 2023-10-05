@@ -28,8 +28,31 @@
       margin-top: 40px;
     }
 
-    .tabeldatakaryawan td {
+    .tabeldatakaryawan tr td {
       padding: 5px;
+    }
+
+    .tabelpresensi {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    .tabelpresensi tr th {
+      border: 1px solid black;
+      padding: 8px;
+      background-color: lightgrey;
+    }
+
+    .tabelpresensi tr td {
+      border: 1px solid black;
+      padding: 5px;
+      font-size: 12px;
+    }
+
+    .foto {
+      width: 40px;
+      height: 30px;
     }
   </style>
 </head>
@@ -58,7 +81,72 @@
         </td>
       </tr>
     </table>
-
+    <table class="tabeldatakaryawan">
+      <tr>
+        <td rowspan="6">
+          @php
+          $path = Storage::url('uploads/karyawan/'.$karyawan->foto);
+          @endphp
+          <img src="{{ url($path) }}" alt="" width="120px" height="150px">
+        </td>
+      </tr>
+      <tr>
+        <td>NIK</td>
+        <td>:</td>
+        <td>{{ $karyawan->nik }}</td>
+      </tr>
+      <tr>
+        <td>Nama Karyawan</td>
+        <td>:</td>
+        <td>{{ $karyawan->nama_lengkap }}</td>
+      </tr>
+      <tr>
+        <td>Jabatan</td>
+        <td>:</td>
+        <td>{{ $karyawan->jabatan }}</td>
+      </tr>
+      <tr>
+        <td>Departemen</td>
+        <td>:</td>
+        <td>{{ $karyawan->nama_dept }}</td>
+      </tr>
+      <tr>
+        <td>No. HP</td>
+        <td>:</td>
+        <td>{{ $karyawan->no_hp }}</td>
+      </tr>
+    </table>
+    <table class="tabelpresensi">
+      <tr>
+        <th>No.</th>
+        <th>Tanggal</th>
+        <th>Jam Masuk</th>
+        <th>Foto</th>
+        <th>Jam Pulang</th>
+        <th>Keterangan</th>
+      </tr>
+      @foreach ($presensi as $d)
+      @php
+      $path_in = Storage::url('uploads/absensi/'.$d->foto_in);
+      $path_out = Storage::url('uploads/absensi/'.$d->foto_out);
+      @endphp
+      <tr>
+        <td>{{ $loop->iteration }}</td>
+        <td>{{ date("d-m-Y",strtotime($d->tgl_presensi)) }}</td>
+        <td>{{ $d->jam_in }}</td>
+        <td><img src="{{ url($path_in) }}" alt="" class="foto"></td>
+        <td>{{ $d->jam_out != null ? $d->jam_out : 'Belum Absen' }}</td>
+        <td><img src="{{ url($path_out) }}" alt="" class="foto"></td>
+        <td>
+          @if ($d->jam_in > '07.00')
+          Terlambat
+          @else
+          Tepat Waktu
+          @endif
+        </td>
+      </tr>
+      @endforeach
+    </table>
   </section>
 
 </body>
