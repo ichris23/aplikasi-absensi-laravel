@@ -1,5 +1,5 @@
 @php
-     function selisih($jam_in, $jam_out)
+    function selisih($jam_in, $jam_out)
         {
             list($h, $m, $s) = explode(":", $jam_in);
             $dtAwal = mktime($h, $m, $s, "1", "1", "1");
@@ -27,9 +27,15 @@
         <td>{{ $d->jam_in }}</td>
         <td><img src="{{ url($foto_in) }}" class="avatar" alt=""></td>
         <td>
-            {!! $d->jam_out =! null ? $d->jam_out : '<span class="badge bg-danger">Belum Absen Pulang' !!}
+            {!! $d->jam_out != null ? $d->jam_out : '<span class="badge bg-danger">Belum Absen Pulang' !!}
         </td>
-        <td><img src="{{ url($foto_out) }}" class="avatar" alt=""></td>
+        <td>
+            @if($d->jam_out != null )
+                <img src="{{ url($foto_out) }}" class="avatar" alt="">
+            @else
+                <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+            @endif
+        </td>
         <td>
             @if ($d->jam_in >= '07:00')
             @php
