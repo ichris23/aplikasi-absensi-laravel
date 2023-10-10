@@ -253,7 +253,7 @@
               </div>
               <div class="dropdown-menu-columns">
                 <div class="dropdown-menu-column">
-                  <a class="dropdown-item" href="/departemen">
+                  <a class="dropdown-item" href="/presensi/rekap">
                     Rekap Presensi
                   </a>
                 </div>
