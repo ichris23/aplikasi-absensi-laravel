@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Departemen;
 use App\Models\User;
 use App\Models\Karyawan;
+use App\Models\KonfigurasiLokasi;
 use Database\Factories\KaryawanFactory;
 use Illuminate\Database\Seeder;
 
@@ -71,6 +72,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ivan Christopher Sukandar',
             'email' => 'ivan@gmail.com',
             'password' => bcrypt('12345')
+        ]);
+
+        KonfigurasiLokasi::create([
+            'lokasi_kantor' => '-7.495028239338877,112.70850706055407',
+            'radius' => '300'
         ]);
     }
 }
