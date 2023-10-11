@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengajuanizin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -316,5 +317,59 @@ class PresensiController extends Controller
             ->get();
 
         return view('presensi.cetakrekap', compact('bulan', 'tahun', 'namabulan', 'rekap'));
+    }
+
+    public function izinsakit(Request $request){
+        $query = Pengajuanizin::query();
+        $query->select('id','tgl_izin','pengajuan_izin.nik','nama_lengkap','jabatan','status','status_approved','keterangan');
+        $query ->join('karyawan','pengajuan_izin.nik','=','karyawan.nik');
+        if(!empty($request->dari) && !empty($request->sampai)){
+            $query->whereBetween('tgl_izin', [$request->dari, $request->sampai]);
+        }
+        if(!empty($request->nik)){
+            $query->where('pengajuan_izin.nik', $request->nik);
+        }
+        if(!empty($request->nama_lengkap)){
+            $query->where('nama_lengkap','like','%' . $request->nama_lengkap . '%');
+        }
+
+        if($request->status_approved == "0" || $request->status_approved == '1' || $request->status_approved == '2'){
+            $query->where('status_approved', $request->status_approved);
+        }
+        $query->orderBy('tgl_izin','desc');
+        $izinsakit = $query->paginate(2);
+        $izinsakit->appends($request->all());
+        return view('presensi.izinsakit',compact('izinsakit'));
+    }
+
+    public function approveizinsakit(Request $request){
+        $status_approved = $request->status_approved;
+        $id_izinsakit_form = $request->id_izinsakit_form;
+        $update = DB::table('pengajuan_izin')->where('id', $id_izinsakit_form)->update([
+            'status_approved' => $status_approved
+        ]);
+        if($update){
+            return Redirect::back()->with(['success'=>'Data Berhasil Diupdate']);
+        }else{
+            return Redirect::back()->with(['warning'=>'Data Gagal Diupdate']);
+        }
+    }
+
+    public function batalkanizinsakit($id){
+        $update = DB::table('pengajuan_izin')->where('id', $id)->update([
+            'status_approved' => 0
+        ]);
+        if($update){
+            return Redirect::back()->with(['success'=>'Data Berhasil Diupdate']);
+        }else{
+            return Redirect::back()->with(['warning'=>'Data Gagal Diupdate']);
+        }
+    }
+
+    public function cekpengajuanizin(Request $request){
+        $tgl_izin = $request->tgl_izin;
+        $nik = Auth::guard('karyawan')->user()->nik;
+        $cek = DB::table('pengajuan_izin')->where('nik', $nik)->where('tgl_izin', $tgl_izin)->count();
+        return $cek;
     }
 }

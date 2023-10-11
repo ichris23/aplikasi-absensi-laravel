@@ -55,6 +55,30 @@
       format: "yyyy-mm-dd"
     });
 
+    $("#tgl_izin").change(function(e){
+      var tgl_izin = $(this).val();
+      $.ajax({
+        type: 'POST',
+        url: '/presensi/cekpengajuanizin',
+        data:{
+          _token: "{{ csrf_token() }}",
+          tgl_izin: tgl_izin
+        },
+        cache: false,
+        success: function(respond){
+          if(respond == 1){
+            Swal.fire({
+              title: 'Oops!',
+              text: 'Anda Sudah Melakukan Pengajuan Izin Pada Tanggal Tersebut !',
+              icon: 'warning',
+        }).then((result) => {
+            $("#tgl_izin").val("");
+        });
+          }
+        }
+      });
+    });
+
     $("#frmIzin").submit(function() {
       var tgl_izin = $("#tgl_izin").val();
       var status = $("#status").val();
