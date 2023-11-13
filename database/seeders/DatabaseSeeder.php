@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Departemen;
+use App\Models\JamMasuk;
 use App\Models\User;
 use App\Models\Karyawan;
 use App\Models\KonfigurasiLokasi;
@@ -77,6 +78,10 @@ class DatabaseSeeder extends Seeder
         KonfigurasiLokasi::create([
             'lokasi_kantor' => '-7.495028239338877,112.70850706055407',
             'radius' => '300'
+        ]);
+
+        JamMasuk::create([
+            'jam' => '07:00'
         ]);
     }
 }

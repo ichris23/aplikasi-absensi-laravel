@@ -32,4 +32,27 @@ class KonfigurasiController extends Controller
             return Redirect::back()->with('failed', 'Update Lokasi Gagal');
         }
     }
+
+    public function jammasuk()
+    {
+        $jam_masuk = DB::table('jam_masuk')->where('id', 1)->first();
+
+        return view('konfigurasi.jammasuk', compact('jam_masuk'));
+    }
+
+    public function updatejammasuk(Request $request)
+    {
+        $jammasuk = $request->jam;
+        $data = [
+            'jam' => $jammasuk,
+        ];
+
+        $update = DB::table('jam_masuk')->where('id', 1)->update($data);
+
+        if ($update) {
+            return Redirect::back()->with('success', 'Update Jam Masuk Berhasil');
+        } else {
+            return Redirect::back()->with('failed', 'Update Jam Masuk Gagal');
+        }
+    }
 }

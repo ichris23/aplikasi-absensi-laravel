@@ -23,7 +23,7 @@
                 </div>
                 @endif
                 <div style="max-height: 500px; overflow:hidden">
-                    <img src="https://source.unsplash.com/1200x600?login" class="card-img-top img-fluid mb-2 mt-3">
+                    <img src="/assets/img/logo_pt.jpeg" class="card-img-top img-fluid mb-2 mt-3" style="width: 100%; max-height: 400px">
                 </div>
                 <h1 class="h3 mb-3 fw-large text-center fs-1">Please Login</h1>
                 <form action="/proseslogin" method="post">

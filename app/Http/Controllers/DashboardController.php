@@ -10,6 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $jam_masuk = DB::table('jam_masuk')->where('id', 1)->first();
         $hariini = date("Y-m-d");
         $bulanini = date("m") * 1; //1 atau Januari
         $tahunini = date("Y"); //2023
@@ -53,7 +54,8 @@ class DashboardController extends Controller
             'tahunini',
             'rekappresensi',
             'leaderboard',
-            'rekapizin'
+            'rekapizin',
+            'jam_masuk'
         ));
     }
 
@@ -70,6 +72,6 @@ class DashboardController extends Controller
             ->where('tgl_izin', $hariini)
             ->where('status_approved', 1)
             ->first();
-        return view('dashboard.dashboardadmin',compact('rekappresensi','rekapizin'));
+        return view('dashboard.dashboardadmin', compact('rekappresensi', 'rekapizin'));
     }
 }
