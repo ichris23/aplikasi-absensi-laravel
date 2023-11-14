@@ -62,23 +62,6 @@
 
 <body class="A4">
 
-@php
-    function selisih($jam_in, $jam_out)
-        {
-            list($h, $m, $s) = explode(":", $jam_in);
-            $dtAwal = mktime($h, $m, $s, "1", "1", "1");
-            list($h, $m, $s) = explode(":", $jam_out);
-            $dtAkhir = mktime($h, $m, $s, "1", "1", "1");
-            $dtSelisih = $dtAkhir - $dtAwal;
-            $totalmenit = $dtSelisih / 60;
-            $jam = explode(".", $totalmenit / 60);
-            $sisamenit = ($totalmenit / 60) - $jam[0];
-            $sisamenit2 = $sisamenit * 60;
-            $jml_jam = $jam[0];
-            return $jml_jam . ":" . round($sisamenit2);
-        }
-@endphp
-
   <!-- Each sheet element should have the class "sheet" -->
   <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
   <section class="sheet padding-10mm">
@@ -153,7 +136,7 @@
       @php
       $path_in = Storage::url('uploads/absensi/'.$d->foto_in);
       $path_out = Storage::url('uploads/absensi/'.$d->foto_out);
-      $jamterlambat = selisih('07:00:00',$d->jam_in);
+      $jamterlambat = selisih($jam_masuk->jam,$d->jam_in);
       @endphp
       <tr>
         <td>{{ $loop->iteration }}</td>
@@ -171,7 +154,7 @@
           @endif
         </td>
         <td>
-          @if ($d->jam_in > '07.00')
+          @if ($d->jam_in > $jam_masuk->jam)
           <p style="color: red">Terlambat {{ $jamterlambat }}</p>
           @else
           Tepat Waktu

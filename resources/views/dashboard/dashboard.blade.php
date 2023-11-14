@@ -225,7 +225,7 @@
                         @endforeach
                     </ul>
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel">
+                <div class="tab-panel fade" id="profile" role="tabpanel">
                     <ul class="listview image-listview">
                         @foreach ( $leaderboard as $d)
                         <li>
@@ -243,7 +243,7 @@
                                         <b>{{ $d->nama_lengkap }}<br>
                                             <small class="text-muted">{{ $d->jabatan }}</small>
                                     </div>
-                                    <span class="badge {{ $d->jam_in < "07:00" ? "bg-sucess" : "bg-danger" }}">{{ $d->jam_in }}</span>
+                                    <span class="badge {{ $d->jam_in < $jam_masuk->jam ? "bg-success" : "bg-danger" }}">{{ $d->jam_in }}</span>
                                 </div>
                             </div>
                         </li>
