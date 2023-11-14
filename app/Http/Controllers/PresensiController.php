@@ -220,6 +220,7 @@ class PresensiController extends Controller
 
     public function getpresensi(Request $request)
     {
+        $jam_masuk = DB::table('jam_masuk')->where('id', 1)->first();
         $tanggal = $request->tanggal;
         $presensi = DB::table('presensi')
             ->select('presensi.*', 'nama_lengkap', 'nama_dept')
@@ -228,7 +229,7 @@ class PresensiController extends Controller
             ->where('tgl_presensi', $tanggal)
             ->get();
 
-        return view('presensi.getpresensi', compact('presensi'));
+        return view('presensi.getpresensi', compact('presensi', 'jam_masuk'));
     }
 
     public function tampilkanpeta(Request $request)
@@ -249,6 +250,7 @@ class PresensiController extends Controller
 
     public function cetaklaporan(Request $request)
     {
+        $jam_masuk = DB::table('jam_masuk')->where('id', 1)->first();
         $nik = $request->nik;
         $bulan = $request->bulan;
         $tahun = $request->tahun;
@@ -272,7 +274,7 @@ class PresensiController extends Controller
             header("Content-Disposition: attachment; filename=Laporan Presensi $time.xls");
             return view('presensi.cetaklaporanexcel', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi'));
         }
-        return view('presensi.cetaklaporan', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi'));
+        return view('presensi.cetaklaporan', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi', 'jam_masuk'));
     }
 
     public function rekap()
