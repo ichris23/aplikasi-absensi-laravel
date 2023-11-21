@@ -218,6 +218,16 @@ class PresensiController extends Controller
         return view('presensi.monitoring');
     }
 
+    public function deleteall()
+    {
+        $delete = DB::table('presensi')->delete();
+        if ($delete) {
+            return Redirect::back()->with(['success' => 'Semua Data Berhasil Dihapus']);
+        } else {
+            return Redirect::back()->with(['failed' => 'Gagal Menghapus Semua Data']);
+        }
+    }
+
     public function getpresensi(Request $request)
     {
         $jam_masuk = DB::table('jam_masuk')->where('id', 1)->first();

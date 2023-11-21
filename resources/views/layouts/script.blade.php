@@ -17,7 +17,8 @@
     <!-- Base Js File -->
     <script src="{{ asset('assets/js/base.js') }}"></script>
     <!-- WEBCAM JS SCRIPT-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+    <script src="{{ asset('assets/js/webcam.js_1.0.26/cdnjs/webcam.js') }}"></script>
+    <script src="{{ asset('assets/js/webcam.js_1.0.26/unpkg/webcam.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
