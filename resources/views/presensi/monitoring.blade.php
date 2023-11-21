@@ -19,6 +19,20 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
+                                @if (Session::get('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                                @if (Session::get('failed'))
+                                    <div class="alert alert-danger">
+                                        {{ session('failed') }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="input-icon mb-3">
                                     <span class="input-icon-addon">
                                       <!-- Download SVG icon from http://tabler-icons.io/i/user -->
@@ -35,6 +49,17 @@
                                     <input type="text" id="tanggal" name="tanggal" value="{{ date("Y-m-d") }}" class="form-control"
                                     placeholder="Tanggal Presensi" autocomplete="off">
                                   </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <form action="/presensi/monitoring/deleteall" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger px-2 border-0" onclick="return confirm('Are you sure?')">Delete All Data</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
