@@ -68,18 +68,18 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 @endsection
 @section('content')
-<div class="row" style="margin-top:70px;">
+<div class="row" style="margin-top:30px;">
     <div class="col">
         @if ($cek > 0)
         <input type="hidden" id="lokasi" disabled readonly>
         <div class="webcam-capture mb-2"></div>
+        <button id="takeabsen" class="btn btn-warning btn-block mb-2"><ion-icon name="camera-outline"></ion-icon>Absen Pulang</button>
         <div id="map" class="mb-2"></div>
-        <button id="takeabsen" class="btn btn-warning btn-block"><ion-icon name="camera-outline"></ion-icon>Absen Pulang</button>
         @else
         <input type="hidden" id="lokasi" disabled readonly>
         <div class="webcam-capture mb-2"></div>
+        <button id="takeabsen" class="btn btn-primary btn-block mb-2"><ion-icon name="camera-outline"></ion-icon>Absen Masuk</button>
         <div id="map" class="mb-2"></div>
-        <button id="takeabsen" class="btn btn-primary btn-block"><ion-icon name="camera-outline"></ion-icon>Absen Masuk</button>
         @endif
     </div>
 </div>
@@ -179,4 +179,5 @@
         });
     });
 </script>
+
 @endpush
