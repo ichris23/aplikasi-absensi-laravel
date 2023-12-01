@@ -13,73 +13,66 @@
 </div>
 <!-- * App Header -->
 <style>
+    .appHeader {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .appHeader.hidden {
+        transform: translateY(-100%);
+    }
+
+    .appBottomMenu{
+        position: relative;
+    }
+
+    .webcam-container{
+        text-align: center;
+    }
+
     .webcam-capture,
     .webcam-capture video {
         display: inline-block;
         width: 100% !important;
-        margin: auto;
+        max-width: 500px;
+        margin: auto !important;
         height: auto !important;
         border-radius: 15px;
     }
 
     #map {
-        height: 180px;
+        height: 300px;
+        max-width: 500px;
+        margin: auto;
     }
 
-    @media only screen and (min-width: 543px) {
-
-        .webcam-capture,
-        .webcam-capture video {
-            display: flex;
-            width: 75% !important;
-            margin: auto;
-            height: auto !important;
-            border-radius: 15px;
-        }
-
-        #map {
-            display: flex;
-            width: 50% !important;
-            height: 70% !important;
-            margin: auto;
-        }
+    #takeabsen{
+        max-width: 500px;
+        width: 100%; 
+        margin: auto;
     }
 
-    @media only screen and (min-width: 716px) {
-
-        .webcam-capture,
-        .webcam-capture video {
-            display: flex;
-            width: 49% !important;
-            margin: auto;
-            height: auto !important;
-            border-radius: 15px;
-        }
-
-        #map {
-            display: flex;
-            width: 50% !important;
-            height: 70% !important;
-            margin: auto;
-        }
-    }
+    
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 @endsection
 @section('content')
-<div class="row" style="margin-top:30px;">
+<div class="row overflow-auto" style="margin-top:70px; min-height:80vh">
     <div class="col">
         @if ($cek > 0)
         <input type="hidden" id="lokasi" disabled readonly>
-        <div class="webcam-capture mb-2"></div>
-        <button id="takeabsen" class="btn btn-warning btn-block mb-2"><ion-icon name="camera-outline"></ion-icon>Absen Pulang</button>
-        <div id="map" class="mb-2"></div>
-        @else
+        <div class="webcam-container">
+            <div class="webcam-capture mb-4"></div>
+            <div id="map" class="mb-2"></div>
+            <button id="takeabsen" class="btn btn-warning btn-block mb-2"><ion-icon name="camera-outline"></ion-icon>Absen Pulang</button>
+            @else
+        </div>
         <input type="hidden" id="lokasi" disabled readonly>
-        <div class="webcam-capture mb-2"></div>
-        <button id="takeabsen" class="btn btn-primary btn-block mb-2"><ion-icon name="camera-outline"></ion-icon>Absen Masuk</button>
-        <div id="map" class="mb-2"></div>
+        <div class="webcam-container">
+            <div class="webcam-capture mb-4"></div>
+            <div id="map" class="mb-2"></div>
+            <button id="takeabsen" class="btn btn-primary btn-block mb-2"><ion-icon name="camera-outline"></ion-icon>Absen Masuk</button>
+        </div>
         @endif
     </div>
 </div>
@@ -176,6 +169,25 @@
                     })
                 }
             }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var lastScrollTop = 0;
+        var header = document.querySelector('.appHeader');
+
+        window.addEventListener("scroll", function () {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scroll down
+                header.classList.add('hidden');
+            } else {
+                // Scroll up
+                header.classList.remove('hidden');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
     });
 </script>

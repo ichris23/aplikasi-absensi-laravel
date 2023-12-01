@@ -888,6 +888,10 @@ button:focus {
   font-size: 10px;
 }
 
+/*.appBottomMenu.hidden {
+  transform: translateY(100%); /* Sembunyikan menu dengan menggeser ke bawah 
+} */
+
 .demoPage .appHeader {
   position: relative;
   z-index: 0;
@@ -7996,7 +8000,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
 
 #user-section {
   height: 180px;
-  background-color: #092c9f;
+  background-color: #6b0060;
   padding: 20px;
 }
 
@@ -8033,6 +8037,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
   top: 150px;
   width: 100%;
   background-color: #e9ecef;
+  margin-top: 3.5rem;
   border-radius: 10px 10px 0px 0px;
 }
 

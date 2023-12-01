@@ -17,7 +17,7 @@
             @if($d->jam_out != null )
                 <img src="{{ url($foto_out) }}" class="avatar" alt="">
             @else
-                <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+                <img src="/assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged rounded w-6">
             @endif
         </td>
         <td>

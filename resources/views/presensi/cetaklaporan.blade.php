@@ -69,7 +69,7 @@
     <table style="width: 100%">
       <tr>
         <td style="width: 30px">
-          <img src="{{ asset('assets/img/logo_pt.jpeg') }}" width="70" height="70" alt="">
+          <img src="{{ asset('assets/img/logo_pt.png') }}" width="70" height="70" alt="">
         </td>
         <td>
           <span id="title">
@@ -150,7 +150,7 @@
           @if($d->jam_out != null)
             <img src="{{ url($path_out) }}" alt="" class="foto">
           @else
-            <img src="{{ url($path2) }}" alt="" width="120px" height="150px">
+            <img src="{{ url($path2) }}" alt="" class="foto">
           @endif
         </td>
         <td>
