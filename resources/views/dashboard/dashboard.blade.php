@@ -13,6 +13,12 @@
     .logout:hover {
         color: white;
     }
+
+    .ct-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 </style>
 <!-- App Capsule -->
 <div id="appCapsule">
@@ -38,6 +44,10 @@
     <div class="section" id="menu-section">
         <div class="card">
             <div class="card-body text-center">
+                <div class="ct-container mb-2">
+                    <span class="badge bg-primary" id="current-date" style="font-size: 0.85em"></></span>
+                    <span class="badge bg-primary" id="current-time" style="font-size: 0.85em"></span>
+                </div>
                 <div class="list-menu">
                     <div class="item-menu text-center">
                         <div class="menu-icon">
@@ -83,7 +93,7 @@
             </div>
         </div>
     </div>
-    <div class="section mt-2" id="presence-section">
+    <div class="section" id="presence-section">
         <div class="todaypresence">
             <div class="row">
                 <div class="col-6">
@@ -192,7 +202,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#profile" role="tab">
-                            Leaderboard
+                            Hari Ini
                         </a>
                     </li>
                 </ul>
@@ -224,27 +234,27 @@
                 </div>
                 <div class="tab-panel fade" id="profile" role="tabpanel">
                     <ul class="listview image-listview">
-                        @foreach ( $leaderboard as $d)
                         <li>
-                            <div class="item">
-                                @if (Auth::guard('karyawan')->user()->foto)
-                                @php
-                                $path = Storage::url('uploads/karyawan/'. Auth::guard('karyawan')->user()->foto)
-                                @endphp
-                                <img src="{{ url($path) }}" alt="avatar" class="imaged" style="height: 70px">
-                                @else
-                                <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
-                                @endif
-                                <div class="in">
-                                    <div>
-                                        <b>{{ $d->nama_lengkap }}<br>
-                                            <small class="text-muted">{{ $d->jabatan }}</small>
+                            @foreach ( $leaderboard as $d)
+                                <div class="item">
+                                    @if ($d->foto)
+                                    @php
+                                    $path = Storage::url('uploads/karyawan/'. $d->foto)
+                                    @endphp
+                                    <img src="{{ url($path) }}" alt="avatar" class="img-fluid imaged overflow-hidden" style="object-fit: cover; max-height:50px; max-width:50px;">
+                                    @else
+                                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+                                    @endif
+                                    <div class="in ml-2">
+                                        <div>
+                                            <b>{{ $d->nama_lengkap }}<br>
+                                                <small class="text-muted">{{ $d->jabatan }}</small>
+                                        </div>
+                                        <span class="badge {{ $d->jam_in < $jam_masuk->jam ? "bg-success" : "bg-danger" }}">{{ $d->jam_in }}</span>
                                     </div>
-                                    <span class="badge {{ $d->jam_in < $jam_masuk->jam ? "bg-success" : "bg-danger" }}">{{ $d->jam_in }}</span>
                                 </div>
-                            </div>
+                            @endforeach
                         </li>
-                        @endforeach
                     </ul>
                 </div>
 
@@ -252,5 +262,51 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    function updateCurrentTime() {
+        var currentDateElement = document.getElementById('current-date');
+        var currentTimeElement = document.getElementById('current-time');
+
+        var now = new Date();
+
+        // Format tanggal (misal: "Jumat, 31 Desember 2023")
+        var optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+        var currentDateString = "Today : " + now.toLocaleDateString('id-ID', optionsDate);
+
+        // Menambahkan ikon kalender Ionicons ke elemen tanggal
+        currentDateElement.innerHTML = '<ion-icon name="calendar-outline"></ion-icon>&nbsp;' + currentDateString;
+
+        // Format jam (misal: "15:30:00")
+        var optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        var currentTimeString = now.toLocaleTimeString('id-ID', optionsTime);
+        currentTimeElement.textContent = currentTimeString;
+
+        // Mengganti tanda titik (.) menjadi titik dua (:)
+        currentTimeString = currentTimeString.replace(/\./g, ':');
+        
+        // Mengambil jam dari waktu saat ini
+        var currentHour = now.getHours();
+
+        // Mendapatkan jam masuk (misal: 08:00:00)
+        var jamMasukHour = parseInt("{{ $jam_masuk->jam }}".split(":")[0]);
+
+        // Menentukan kelas warna berdasarkan perbandingan waktu
+        var badgeColorClass = currentHour < jamMasukHour ? "bg-success" : "bg-danger";
+
+        // Menetapkan warna badge
+        currentTimeElement.className = "badge " + badgeColorClass + " id='current-time' style='font-size: 0.85em'";
+
+        // Menambahkan ikon jam dari Bootstrap
+        currentTimeElement.innerHTML = '<ion-icon name="time-outline"></ion-icon>&nbsp' + currentTimeString;
+    }
+
+    // Memanggil fungsi pertama kali
+    updateCurrentTime();
+
+    // Memperbarui waktu setiap detik
+    setInterval(updateCurrentTime, 1000);
+});
+</script>
 <!-- * App Capsule -->
 @endsection
