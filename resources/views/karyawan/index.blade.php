@@ -155,7 +155,7 @@
                                         <path d="M14 12h4"></path>
                                     </svg>
                                 </span>
-                                <input type="text" value="" class="form-control" placeholder="NIK" name="nik" required autocomplete="off"/>
+                                <input type="text" value="" class="form-control" placeholder="NIK" name="nik" required autocomplete="off" minlength="3" oninvalid="this.setCustomValidity('Mohon masukkan NIK dengan valid')" oninput="this.setCustomValidity('')" />
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                                         <path d="M15 3a6 6 0 0 1 6 6"></path>
                                     </svg>
                                 </span>
-                                <input type="text" value="" class="form-control" placeholder="Nomor HP" name="no_hp" autocomplete="off" required/>
+                                <input type="text" value="" class="form-control" placeholder="Nomor HP" name="no_hp" autocomplete="off" required minlength="11" oninvalid="this.setCustomValidity('Mohon masukkan Nomor HP dengan panjang minimal 11 karakter.')" oninput="this.setCustomValidity('')" />
                             </div>
                         </div>
                     </div>

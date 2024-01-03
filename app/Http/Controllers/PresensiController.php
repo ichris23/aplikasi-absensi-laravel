@@ -282,7 +282,6 @@ class PresensiController extends Controller
             header("Content-type: application/vnd-ms-excel");
             // Mendefinisikan nama file ekspor "hasil-export.xls"
             header("Content-Disposition: attachment; filename=Laporan Presensi $time.xls");
-            return view('presensi.cetaklaporanexcel', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi'));
         }
         return view('presensi.cetaklaporan', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi', 'jam_masuk'));
     }
@@ -366,7 +365,7 @@ class PresensiController extends Controller
             $query->where('status_approved', $request->status_approved);
         }
         $query->orderBy('tgl_izin', 'desc');
-        $izinsakit = $query->paginate(2);
+        $izinsakit = $query->paginate(5);
         $izinsakit->appends($request->all());
         return view('presensi.izinsakit', compact('izinsakit'));
     }
