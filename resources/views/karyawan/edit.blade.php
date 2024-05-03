@@ -13,7 +13,7 @@
                         <path d="M14 12h4"></path>
                     </svg>
                 </span>
-                <input type="text" readonly value="{{ $karyawan->nik }}" class="form-control" placeholder="NIK" name="nik" required autocomplete="off"/>
+                <input type="text" readonly value="{{ $karyawan->nik }}" class="form-control" placeholder="Nomor Karyawan" name="nik" required autocomplete="off"/>
             </div>
         </div>
     </div>

@@ -86,7 +86,7 @@
     </table>
     <table class="tabelpresensi">
       <tr>
-        <th rowspan="2">Nik</th>
+        <th rowspan="2">No. Karyawan</th>
         <th rowspan="2">Nama Karyawan</th>
         <th colspan="31">Tanggal</th>
         <th rowspan="2">TH</th>

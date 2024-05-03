@@ -96,7 +96,7 @@
         </td>
       </tr>
       <tr>
-        <td>NIK</td>
+        <td>No. Karyawan</td>
         <td>:</td>
         <td>{{ $karyawan->nik }}</td>
       </tr>

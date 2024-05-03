@@ -68,7 +68,7 @@
                                     <thead>
                                         <tr class="text-center">
                                             <th>No.</th>
-                                            <th>Nik</th>
+                                            <th>Nomor Kaaryawan</th>
                                             <th>Nama Karyawan</th>
                                             <th>Departemen</th>
                                             <th>Jam Masuk</th>
