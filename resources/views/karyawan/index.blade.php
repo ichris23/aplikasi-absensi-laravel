@@ -82,7 +82,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>NIK</th>
+                                        <th>Nomor Karyawan</th>
                                         <th>Nama</th>
                                         <th>Jabatan</th>
                                         <th>Nomor HP</th>
@@ -155,7 +155,7 @@
                                         <path d="M14 12h4"></path>
                                     </svg>
                                 </span>
-                                <input type="text" value="" class="form-control" placeholder="NIK" name="nik" required autocomplete="off" minlength="3" oninvalid="this.setCustomValidity('Mohon masukkan NIK dengan valid')" oninput="this.setCustomValidity('')" />
+                                <input type="text" value="" class="form-control" placeholder="Nomor Karyawan" name="nik" required autocomplete="off" minlength="3" oninvalid="this.setCustomValidity('Mohon masukkan Nomor Karyawan dengan valid')" oninput="this.setCustomValidity('')" />
                             </div>
                         </div>
                     </div>

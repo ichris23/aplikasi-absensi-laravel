@@ -29,8 +29,8 @@
                 <form action="/proseslogin" method="post">
                     @csrf
                     <div class="form-floating">
-                        <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" placeholder="name@example.com" autofocus required value="{{ old('nik') }}" autocomplete="off">
-                        <label for="nik">Nomor Induk Karyawan</label>
+                        <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" placeholder="123" autofocus required value="{{ old('nik') }}" autocomplete="off">
+                        <label for="nik">Nomor Karyawan</label>
                         @error('nik')
                         <div class="invalid-feedback">
                             {{ $message }}

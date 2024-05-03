@@ -53,7 +53,7 @@
                                         <path d="M14 12h4"></path>
                                     </svg>
                                 </span>
-                                <input type="text" value="{{ Request('nik') }}" id="nik" class="form-control" placeholder="Nik" name="nik">
+                                <input type="text" value="{{ Request('nik') }}" id="nik" class="form-control" placeholder="Nomor Karyawan" name="nik">
                             </div>
                         </div>
                         <div class="col-3">
@@ -101,7 +101,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Tanggal</th>
-                            <th>Nik</th>
+                            <th>Nomor Karyawan</th>
                             <th>Nama Karyawan</th>
                             <th>Jabatan</th>
                             <th>Status</th>
